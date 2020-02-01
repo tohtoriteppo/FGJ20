@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class Movement : MonoBehaviour
     private int platformLayer = 11;
     private bool onPlatform;
 
+    private float oxygenLevel = 1;
+    private float oxygenDecrease;
+
+    private bool dead = false;
+
+    public GameObject oxygenBar;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +47,10 @@ public class Movement : MonoBehaviour
         groundSpeed = manager.GetPlayerSpeed();
         swimMaxSpeed = manager.GetSwimMaxSpeed();
         swimAcceleration = manager.GetSwimAcceleration();
+        oxygenDecrease = manager.GetOxygenDecrease();
         collider = GetComponent<BoxCollider2D>();
-        
-
+        oxygenBar = Instantiate(oxygenBar, FindObjectOfType<Canvas>().transform);
+        oxygenBar.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -50,9 +58,14 @@ public class Movement : MonoBehaviour
     
     void Update()
     {
-        Repair();
+        if(!dead)
+        {
+            TestGravity();
+            Jump();
+            DecreaseOxygen();
+        }
         SetSpeeds();
-        Jump();
+
     }
 
     
@@ -60,10 +73,31 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         PlatformIgnoring();
-        Move();
+        if(!dead) Move();
         Animate();
+        RestrictBounds();
     }
-
+    private void DecreaseOxygen()
+    {
+        if(!isGravity)
+        {
+            oxygenLevel -= oxygenDecrease;
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            oxygenBar.transform.position = new Vector2(pos.x, pos.y + 20);
+            oxygenBar.GetComponent<Slider>().value = oxygenLevel;
+            if (oxygenLevel < 0) Die();
+        }
+    }
+    private void Die()
+    {
+        //die animations etc
+        oxygenBar.SetActive(false);
+        dead = true;
+    }
+    public void Resurrect()
+    {
+        oxygenLevel = 1;
+    }
     private void Jump()
     {
         //try jumping
@@ -109,22 +143,34 @@ public class Movement : MonoBehaviour
         
         
     }
+
+    private void RestrictBounds()
+    {
+        if (Mathf.Abs(transform.position.x) > 8.8 || Mathf.Abs(transform.position.y) > 4.4f)
+        {
+            rb.AddForce(new Vector2(-transform.position.x, -transform.position.y));
+        }
+    }
     private void Move()
     {
         
         if (isGravity)
         {
-            rb.velocity = new Vector2(horizontal*groundSpeed, rb.velocity.y);
-            
+            rb.velocity = new Vector2(horizontal * groundSpeed, rb.velocity.y);
+
         }
         else
         {
             rb.AddForce(new Vector2(horizontal * swimAcceleration, vertical * swimAcceleration));
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, swimMaxSpeed);
-
         }
+        
+        
     }
-
+    public bool IsDead()
+    {
+        return dead;
+    }
     private void Animate()
     {
         if(!isGravity)
@@ -157,7 +203,7 @@ public class Movement : MonoBehaviour
         vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical");
     }
 
-    private void Repair()
+    private void TestGravity()
     {
         if(Input.GetButtonDown("p" + playerNum + "_button_y"))
         {
@@ -168,6 +214,17 @@ public class Movement : MonoBehaviour
     {
         isGravity = on;
         rb.gravityScale = isGravity ? 1 : 0;
+        if (isGravity)
+        {
+            oxygenLevel = 1;
+            oxygenBar.SetActive(false);
+            rb.freezeRotation = false;
+        }
+        else
+        {
+            oxygenBar.SetActive(true);
+            rb.freezeRotation = true;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -192,9 +249,5 @@ public class Movement : MonoBehaviour
                 grounded = false;
             }
         }
-        //check if collision below?
-
-
     }
-
 }

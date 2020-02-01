@@ -12,6 +12,7 @@ public class ItemManagement : MonoBehaviour
     private PlayerManager manager;
     private float throwForce;
     private float throwChargeTime;
+    private float repairAmount;
     private bool charging;
     private float timeStarted;
 
@@ -23,6 +24,7 @@ public class ItemManagement : MonoBehaviour
         manager = FindObjectOfType<PlayerManager>();
         throwForce = manager.GetThrowForce();
         throwChargeTime = manager.GetThrowChargeTime();
+        repairAmount = manager.GetRepairAmount();
         item = null; // !!!
     }
 
@@ -49,9 +51,10 @@ public class ItemManagement : MonoBehaviour
         {
             foreach (GameObject obj in objectsClose)
             {
-                if (obj.tag == "repairable")
+                Damageable dmg = obj.GetComponent<Damageable>();
+                if (dmg != null)
                 {
-                    //repair
+                    dmg.Repair(repairAmount);
                 }
             }
         }
