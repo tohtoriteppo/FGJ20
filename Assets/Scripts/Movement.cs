@@ -15,11 +15,22 @@ public class Movement : MonoBehaviour
     private float vertical;
 
     private bool isGravity = false;
-    private bool jumped = false;
+    private bool grounded = true;
+    private bool droppingThrough = false;
+
+    private BoxCollider2D collider;
 
     private PlayerManager manager;
+    private GameObject floor;
 
     private Rigidbody2D rb;
+    private bool jumpingThrough;
+
+    private int playerLayer = 9;
+    private int platformLayer = 11;
+    private bool onPlatform;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +40,9 @@ public class Movement : MonoBehaviour
         groundSpeed = manager.GetPlayerSpeed();
         swimMaxSpeed = manager.GetSwimMaxSpeed();
         swimAcceleration = manager.GetSwimAcceleration();
+        collider = GetComponent<BoxCollider2D>();
+        
+
     }
 
     // Update is called once per frame
@@ -43,32 +57,59 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        PlatformIgnoring();
         Move();
         Animate();
     }
 
+    private void RestoreCollider()
+    {
+        collider.enabled = true;
+        onPlatform = false;
+    }
+    private void PlatformIgnoring()
+    {
+        if(isGravity)
+        {
+            if (onPlatform && vertical == -1)
+            {
+                collider.enabled = false;
+                Invoke("RestoreCollider", 0.3f*rb.gravityScale);
+            }
+            else
+            {
+                bool ignore = rb.velocity.y > 0 || !isGravity;
+                Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, ignore);
+            }
+            
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, true);
+        }
+        
+        
+    }
     private void Move()
     {
         
         if (isGravity)
         {
             rb.velocity = new Vector2(horizontal*groundSpeed, rb.velocity.y);
-            if (!jumped && vertical == 1)
+            //try jumping
+            if (vertical == 1)
             {
-                rb.velocity = new Vector2(rb.velocity.x, vertical * jumpForce);
-                jumped = true;
+                if(grounded)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, vertical * jumpForce);
+                    grounded = false;
+                }
             }
-
-            //cap to max speed
-            //rb.velocity = new Vector2(Mathf.Min(rb.velocity.x, maxSpeed), rb.velocity.y);
         }
         else
         {
             rb.AddForce(new Vector2(horizontal * swimAcceleration, vertical * swimAcceleration));
-            Debug.Log("Swimspeed " + swimMaxSpeed);
-            Debug.Log("velocity1 " + rb.velocity.magnitude);
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, swimMaxSpeed);
-            Debug.Log("velocity2 " + rb.velocity.magnitude);
 
         }
     }
@@ -98,6 +139,7 @@ public class Movement : MonoBehaviour
         }
         
     }
+
     private void SetSpeeds()
     {
         horizontal = Input.GetAxis("p" + playerNum + "_joystick_horizontal");
@@ -124,9 +166,24 @@ public class Movement : MonoBehaviour
             ContactPoint2D contact = collision.contacts[0];
             if (Vector2.Dot(contact.normal, Vector2.up) > 0.5)
             {
-                jumped = false;
+                grounded = true;
+                if(collision.gameObject.layer == platformLayer)
+                {
+                    onPlatform = true;
+                }
+                else
+                {
+                    onPlatform = false;
+                }
+            }
+            else
+            {
+                grounded = false;
             }
         }
         //check if collision below?
+
+
     }
+
 }
