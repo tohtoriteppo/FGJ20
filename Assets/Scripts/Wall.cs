@@ -16,8 +16,6 @@ public class Wall : Damageable
         None
     }
 
-    public float maxHP = 200;
-    private float HP;
     public bool broken = false;
     public WallState state;
     public List<Room> rooms = new List<Room>();
@@ -51,8 +49,6 @@ public class Wall : Damageable
 
     public bool IsOuterHull()
     {
-        Debug.Log(this);
-        Debug.Log(rooms.Count);
         return rooms.Count < 2;
     }
 

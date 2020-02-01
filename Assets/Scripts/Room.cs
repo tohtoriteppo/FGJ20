@@ -12,7 +12,6 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         if (other.gameObject.GetComponent<Wall>())
         {
             Wall wall = other.gameObject.GetComponent<Wall>();
@@ -41,14 +40,11 @@ public class Room : MonoBehaviour
 
     public void SetGravity(bool gravityEnabled)
     {
-        Debug.Log("Settings gravity: " + gravityEnabled.ToString());
         ResetVisited();
         bool hullBroken = SetGravityRecursive(gravityEnabled);
-        Debug.Log("Hull: " + hullBroken.ToString());
         if (hullBroken && gravityEnabled)
         {
             // Found a broken outerhull -> Disable gravity
-            Debug.Log("Hull is broken! Revert!");
             ResetVisited();
             SetGravityRecursive(false);
         }
