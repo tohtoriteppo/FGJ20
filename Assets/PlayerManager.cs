@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float swimMaxSpeed = 5f;
     [SerializeField] float swimAcceleration = 5f;
     [SerializeField] float jumpForce = 500f;
+    [SerializeField] float throwForce = 10f;
+    [SerializeField] float throwChargeTime = 2f;
 
     private int wallLayer = 8;
     private int playerLayer = 9;
@@ -41,5 +43,13 @@ public class PlayerManager : MonoBehaviour
     public float GetSwimAcceleration()
     {
         return swimAcceleration;
+    }
+    public float GetThrowForce()
+    {
+        return throwForce;
+    }
+    public float GetThrowChargeTime()
+    {
+        return throwChargeTime;
     }
 }

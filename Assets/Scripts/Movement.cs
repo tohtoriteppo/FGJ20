@@ -52,14 +52,33 @@ public class Movement : MonoBehaviour
     {
         Repair();
         SetSpeeds();
+        Jump();
     }
 
+    
 
     private void FixedUpdate()
     {
         PlatformIgnoring();
         Move();
         Animate();
+    }
+
+    private void Jump()
+    {
+        //try jumping
+        if (Input.GetButtonDown("p" + playerNum + "_button_x"))
+        {
+            if (grounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                grounded = false;
+            }
+        }
+    }
+    public int GetPlayerNum()
+    {
+        return playerNum;
     }
 
     private void RestoreCollider()
@@ -96,15 +115,7 @@ public class Movement : MonoBehaviour
         if (isGravity)
         {
             rb.velocity = new Vector2(horizontal*groundSpeed, rb.velocity.y);
-            //try jumping
-            if (vertical == 1)
-            {
-                if(grounded)
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, vertical * jumpForce);
-                    grounded = false;
-                }
-            }
+            
         }
         else
         {
@@ -134,7 +145,7 @@ public class Movement : MonoBehaviour
         {
             transform.rotation = Quaternion.identity;
             if(horizontal < 0) GetComponent<SpriteRenderer>().flipX = true;
-            else GetComponent<SpriteRenderer>().flipX = false;
+            else if(horizontal >0) GetComponent<SpriteRenderer>().flipX = false;
 
         }
         
@@ -148,7 +159,7 @@ public class Movement : MonoBehaviour
 
     private void Repair()
     {
-        if(Input.GetButtonDown("p" + playerNum + "_button_x"))
+        if(Input.GetButtonDown("p" + playerNum + "_button_y"))
         {
             SetGravity(!isGravity);
         }
