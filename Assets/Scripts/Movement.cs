@@ -34,6 +34,8 @@ public class Movement : MonoBehaviour
     private float oxygenLevel = 1;
     private float oxygenDecrease;
 
+    private string jumpString;
+
     private bool dead = false;
 
     public GameObject oxygenBar;
@@ -48,9 +50,11 @@ public class Movement : MonoBehaviour
         swimMaxSpeed = manager.GetSwimMaxSpeed();
         swimAcceleration = manager.GetSwimAcceleration();
         oxygenDecrease = manager.GetOxygenDecrease();
+        jumpString = "_button_" + manager.GetJumpButton();
         collider = GetComponent<BoxCollider2D>();
         oxygenBar = Instantiate(oxygenBar, FindObjectOfType<Canvas>().transform);
-        oxygenBar.SetActive(false); 
+        oxygenBar.SetActive(false);
+        SetGravity(true);
     }
 
     // Update is called once per frame
@@ -101,7 +105,7 @@ public class Movement : MonoBehaviour
     private void Jump()
     {
         //try jumping
-        if (Input.GetButtonDown("p" + playerNum + "_button_x"))
+        if (Input.GetButtonDown("p" + playerNum + jumpString))
         {
             if (grounded)
             {

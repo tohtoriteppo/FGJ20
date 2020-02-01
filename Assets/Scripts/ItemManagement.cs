@@ -15,6 +15,8 @@ public class ItemManagement : MonoBehaviour
     private float repairAmount;
     private bool charging;
     private float timeStarted;
+    private string repairString;
+    private string pickupString;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class ItemManagement : MonoBehaviour
         throwForce = manager.GetThrowForce();
         throwChargeTime = manager.GetThrowChargeTime();
         repairAmount = manager.GetRepairAmount();
+        repairString = "_button_"+ manager.GetRepairButton();
+        pickupString = "_button_"+ manager.GetPickupButton();
         item = null; // !!!
     }
 
@@ -47,7 +51,7 @@ public class ItemManagement : MonoBehaviour
 
     private void Repair()
     {
-        if (Input.GetButton("p" + playerNum + "_button_b") && item != null)
+        if (Input.GetButton("p" + playerNum + repairString) && item != null)
         {
             foreach (GameObject obj in objectsClose)
             {
@@ -62,12 +66,12 @@ public class ItemManagement : MonoBehaviour
 
     private void Throw()
     {
-        if (Input.GetButtonDown("p" + playerNum + "_button_x") && item != null)
+        if (Input.GetButtonDown("p" + playerNum + pickupString) && item != null)
         {
             charging = true;
             timeStarted = Time.time;
         }
-        else if (Input.GetButtonUp("p" + playerNum + "_button_x") && item != null && charging)
+        else if (Input.GetButtonUp("p" + playerNum + pickupString) && item != null && charging)
         {
             float horizontal = Input.GetAxis("p" + playerNum + "_joystick_horizontal");
             float vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical");
@@ -88,7 +92,7 @@ public class ItemManagement : MonoBehaviour
 
     private void PickUp()
     {
-        if (Input.GetButtonDown("p" + movement.GetPlayerNum() + "_button_x"))
+        if (Input.GetButtonDown("p" + movement.GetPlayerNum() + pickupString))
         {
             foreach(GameObject obj in objectsClose)
             {

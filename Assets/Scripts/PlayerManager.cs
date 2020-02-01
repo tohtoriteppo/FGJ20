@@ -12,6 +12,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float throwChargeTime;
     [SerializeField] float repairAmount;
     [SerializeField] float oxygenDecrease;
+    [SerializeField] string jumpButton;
+    [SerializeField] string pickupButton;
+    [SerializeField] string repairButton;
 
     private int wallLayer = 8;
     private int playerLayer = 9;
@@ -80,5 +83,17 @@ public class PlayerManager : MonoBehaviour
     public float GetOxygenDecrease()
     {
         return oxygenDecrease;
+    }
+    public string GetJumpButton()
+    {
+        return jumpButton;
+    }
+    public string GetRepairButton()
+    {
+        return repairButton;
+    }
+    public string GetPickupButton()
+    {
+        return pickupButton;
     }
 }
