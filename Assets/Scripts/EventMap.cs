@@ -17,6 +17,12 @@ public class EventMap : MonoBehaviour
     float decreasingTimer = 0.0f;
     public Vector2 speedVector = Vector2.zero;
     Vector2 helper = Vector2.zero;
+
+    public int radius = 5;
+
+    float fuel = 0.0f;
+    float emp = 0.0f;
+    float meteors = 0.0f;
     //float decreasingTimer = 0.0f;
 
     Color[] pixels;
@@ -44,18 +50,62 @@ public class EventMap : MonoBehaviour
         //Spawn meteor
         gameObject.GetComponent<MeteroSpawner>().SpawnMetero(Random.Range(1.0f, 2.0f));
     }
-
-    void EmpDamage(float f)
+    
+    public float GetEmpValue()
     {
-        //Tick emp damage
-        Debug.Log("So much damage " + f);
+        return emp;
     }
 
-    void Fuel(float f)
+    public float GetFuelValue()
+    {
+        return fuel;
+    }
+
+    public float GetMeteorValue()
+    {
+        return meteors;
+    }
+
+    void ResourceUpdater()
     {
         //Increase available fuel
-        Debug.Log("Very much fuel " + f);
+        //Debug.Log("Very much fuel " + f);
+
+        int i = 0;
+        Vector3 sum = Vector3.zero;
+        
+        for (int y = -radius; y <= radius; y++)
+        {
+            for (int x = -radius; x <= radius; x++)
+            {
+                if (new Vector2(y,x).magnitude <= radius)
+                {
+                    if (shipLocation.x + x >= 0 && shipLocation.x + x < mapTexture.width && shipLocation.y + y >= 0 && shipLocation.y + y < mapTexture.height)
+                    {
+                        Color temp = pixels[((int)shipLocation.y + y) * mapTexture.width + (int)shipLocation.x + x];
+                        sum.x += temp.r;
+                        sum.y += temp.g;
+                        sum.z += temp.b;
+                        i++;
+                    }
+                }
+            }
+        }
+        sum /= i;
+        meteors = sum.x;
+        fuel = sum.y;
+        emp = sum.z;
     }
+
+    
+
+    public float DistanceToTarget()
+    {
+        float currentMax = 1.0f / Mathf.Cos(angle) * mapTexture.width;
+        float currentDist = ((float) mapTexture.width - shipLocation.x) / Mathf.Cos(angle);
+        return currentDist / currentMax;
+    }
+   
 
     void Item(float f)
     {
@@ -125,10 +175,12 @@ public class EventMap : MonoBehaviour
             if (decreasingTimer <= 0.0f)
             {
                 decreasingTimer += derp;
-                EmpDamage(pixel.g);
-                Fuel(pixel.b);
+                Debug.Log(DistanceToTarget());
             }
-
+            Transform camera = gameObject.transform.GetChild(0);
+            camera.localPosition = new Vector3(-2.85f + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
+            camera.rotation = Quaternion.Euler(0, 0, -angleDegrees);
+            ResourceUpdater();
         }
 
     }
