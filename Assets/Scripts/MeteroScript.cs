@@ -41,10 +41,13 @@ public class MeteroScript : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = directionVector*speed;
         GameObject other = collision.collider.gameObject;
         //other.GetComponent<BoxCollider2D>().enabled = false;
-        currentHealth -= other.GetComponent<Wall>().Damage(currentHealth);
-        if (currentHealth <= 0)
+        if (other.GetComponent<Damageable>())
         {
-            ded();
+            currentHealth -= other.GetComponent<Damageable>().Damage(currentHealth);
+            if (currentHealth <= 0)
+            {
+                ded();
+            }
         }
     }
 

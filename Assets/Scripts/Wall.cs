@@ -64,9 +64,9 @@ public class Wall : Damageable
                 room.SetGravity(true);
             }
             UpdateCollider();
-            UpdateColor();
-        }
-
+            
+        }    
+        UpdateColor();
         return HP - oldHP; // Return amount repaired
     }
 
@@ -74,6 +74,7 @@ public class Wall : Damageable
     {
         float oldHP = HP;
         HP = Mathf.Max(HP - value, 0);
+        
         if (!broken && HP <= 0)
         {
             broken = true;
@@ -84,16 +85,23 @@ public class Wall : Damageable
 
             }
             UpdateCollider();
-            UpdateColor();
         }
-
+        UpdateColor();
         return oldHP - HP; // Return amount damaged
     }
 
     void UpdateColor()
     {
         if (!sprite) return;
-        sprite.color = (broken) ? brokenColor : solidColor;
+        if (broken) sprite.color = brokenColor;
+        else
+        {
+            Color color = solidColor;
+            color.a = Mathf.Max(HP / maxHP, brokenColor.a + 0.2f);
+            sprite.color = color;
+            Debug.Log(color);
+        }
+        
     }
 
     void UpdateCollider()

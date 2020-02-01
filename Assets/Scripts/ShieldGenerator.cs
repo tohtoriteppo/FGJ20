@@ -2,10 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityMachine : Machine
+public class ShieldGenerator : Machine
 {
-    public float minActivationHP = 50;
-    
+    private Shield shield;
+    public float maxRepairRate;
+
+    private void Awake()
+    {
+        shield = FindObjectOfType<Shield>();
+    }
+
+    private void Update()
+    {
+        if (shield) shield.Repair(maxRepairRate * HP / maxHP * Time.deltaTime);
+    }
+
     override public float Repair(float value)
     {
         float oldHP = HP;
@@ -19,10 +30,4 @@ public class GravityMachine : Machine
         HP = Mathf.Max(HP - value, 0);
         return oldHP - HP; // Return amount damaged
     }
-
-    public bool HasGravity()
-    {
-        return HP > minActivationHP;
-    }
-    
 }
