@@ -40,9 +40,29 @@ public class Movement : MonoBehaviour
 
     public GameObject oxygenBar;
 
+    float mapX = 1f;
+    float mapY = 1f;
+
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        var vertExtent = Camera.main.orthographicSize;
+        var horzExtent = vertExtent * Screen.width / Screen.height;
+
+        Debug.Log("horz: "+ horzExtent);
+        Debug.Log("vert: "+ vertExtent);
+        // Calculations assume map is position at the origin
+        minX = horzExtent - mapX / 2.0f;
+        maxX = mapX / 2.0f - horzExtent;
+        minY = vertExtent - mapY / 2.0f;
+        maxY = mapY / 2.0f - vertExtent;
+
         rb = GetComponent<Rigidbody2D>();
         manager = FindObjectOfType<PlayerManager>();
         jumpForce = manager.GetJumpForce();
@@ -150,7 +170,8 @@ public class Movement : MonoBehaviour
 
     private void RestrictBounds()
     {
-        if (Mathf.Abs(transform.position.x) > 8.8 || Mathf.Abs(transform.position.y) > 4.4f)
+        Debug.Log("max: " + maxY + " : " + maxX);
+        if (Mathf.Abs(transform.position.x) > minX || Mathf.Abs(transform.position.y) > minY)
         {
             rb.AddForce(new Vector2(-transform.position.x, -transform.position.y));
         }
