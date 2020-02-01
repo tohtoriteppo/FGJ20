@@ -6,8 +6,7 @@ using UnityEngine;
 public class Wall : Damageable
 {
 
-    public Color brokenColor;
-    public Color solidColor;
+    public float brokenAlpha = 0.1f;
     
     public enum WallState
     {
@@ -93,15 +92,11 @@ public class Wall : Damageable
     void UpdateColor()
     {
         if (!sprite) return;
-        if (broken) sprite.color = brokenColor;
-        else
-        {
-            Color color = solidColor;
-            color.a = Mathf.Max(HP / maxHP, brokenColor.a + 0.2f);
-            sprite.color = color;
-            Debug.Log(color);
-        }
-        
+        Color color = sprite.color;
+        if (state == WallState.None) color.a = 0;
+        else if (broken) color.a = brokenAlpha;
+        else color.a = Mathf.Max(HP / maxHP, brokenAlpha + 0.2f);
+        sprite.color = color;
     }
 
     void UpdateCollider()
