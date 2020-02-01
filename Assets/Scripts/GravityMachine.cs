@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class GravityMachine : Machine
 {
-    public float minActivationHP = 50;
-    
+    public float minActivationHP = 0;
+    public GameObject healthBar;
+
+    void Start()
+    {
+        healthBar = Instantiate(healthBar, FindObjectOfType<Canvas>().transform);
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        healthBar.transform.position = new Vector2(pos.x, pos.y + 40);
+    }
+
     override public float Repair(float value)
     {
         float oldHP = HP;
