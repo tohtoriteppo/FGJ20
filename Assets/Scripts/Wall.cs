@@ -63,7 +63,7 @@ public class Wall : Damageable
             {
                 room.SetGravity(true);
             }
-
+            UpdateCollider();
             UpdateColor();
         }
 
@@ -80,9 +80,11 @@ public class Wall : Damageable
             foreach (Room room in rooms)
             {
                 room.SetGravity(!IsOuterHull());  // TODO: Its unnecessary to set gravity for both rooms
-                UpdateColor();
+                
 
             }
+            UpdateCollider();
+            UpdateColor();
         }
 
         return oldHP - HP; // Return amount damaged
@@ -92,6 +94,11 @@ public class Wall : Damageable
     {
         if (!sprite) return;
         sprite.color = (broken) ? brokenColor : solidColor;
+    }
+
+    void UpdateCollider()
+    {
+        GetComponent<Collider2D>().enabled = !broken;
     }
 
     
