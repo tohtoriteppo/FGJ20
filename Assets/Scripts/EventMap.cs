@@ -48,7 +48,7 @@ public class EventMap : MonoBehaviour
     void Meteor()
     {
         //Spawn meteor
-        gameObject.GetComponent<MeteroSpawner>().SpawnMetero(Random.Range(1.0f, 2.0f));
+        gameObject.GetComponent<MeteroSpawner>().SpawnMetero(speed/10.0f);
     }
     
     public float GetEmpValue()

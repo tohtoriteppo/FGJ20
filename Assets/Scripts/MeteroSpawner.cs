@@ -5,9 +5,10 @@ using UnityEngine;
 public class MeteroSpawner : MonoBehaviour
 {
     public GameObject meteroPrefab;
-    public float radii = 11f;
+    public float radii = 13f;
     public Vector2 upLeft;
     public Vector2 botRight;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +16,9 @@ public class MeteroSpawner : MonoBehaviour
         
     }
 
-    public void SpawnMetero(float speed)
+    public void SpawnMetero(float plier)
     {
-        float rando = Random.Range(0f, Mathf.PI * 2);
+        float rando = Random.Range(-Mathf.PI*(1.0f / 2 - plier * 4 / 5), Mathf.PI*(1.0f / 2 - plier * 4 / 5));
         float spawnX = Mathf.Cos(rando) * radii;
         float spawnY = Mathf.Sin(rando) * radii;
         float targetX = Random.Range(upLeft.x, botRight.x);
@@ -34,6 +35,6 @@ public class MeteroSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
