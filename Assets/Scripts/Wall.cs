@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+public class Wall : Damageable
 {
 
     public Color brokenColor;
@@ -56,8 +56,9 @@ public class Wall : MonoBehaviour
         return rooms.Count < 2;
     }
 
-    public void Repair(float value)
+    override public float Repair(float value)
     {
+        float oldHP = HP;
         HP = Mathf.Min(HP + value, maxHP);
         if (broken && HP > 0)
         {
@@ -69,9 +70,11 @@ public class Wall : MonoBehaviour
 
             UpdateColor();
         }
+
+        return HP - oldHP; // Return amount repaired
     }
 
-    public float Damage(float value)
+    override public float Damage(float value)
     {
         float oldHP = HP;
         HP = Mathf.Max(HP - value, 0);
@@ -86,7 +89,7 @@ public class Wall : MonoBehaviour
             }
         }
 
-        return oldHP - HP;
+        return oldHP - HP; // Return amount damaged
     }
 
     void UpdateColor()
