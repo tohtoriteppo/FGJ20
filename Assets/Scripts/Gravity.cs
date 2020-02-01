@@ -6,11 +6,13 @@ public class Gravity : MonoBehaviour
 {
 
     private int gravity_count = 0;
+    //private bool has_gravity = false;
+    private Movement parent_movement;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        parent_movement = transform.parent.GetComponentInChildren<Movement>();   
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class Gravity : MonoBehaviour
         {
             if (gravity_count++ == 0)
             {
-                GetComponentInChildren<Movement>().SetGravity(true);
+                parent_movement.SetGravity(true);
             }
         }
     }
@@ -41,7 +43,7 @@ public class Gravity : MonoBehaviour
             }
             if (gravity_count == 0)
             {
-                GetComponentInChildren<Movement>().SetGravity(false);
+                 parent_movement.SetGravity(false);
             }
         }
     }
