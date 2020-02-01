@@ -62,6 +62,7 @@ public class Room : MonoBehaviour
     {
         roomChecked = true;
         gravity = newGravity;
+        GetComponent<Collider2D>().enabled = newGravity;
         bool hullBroken = false;
         foreach (Wall wall in walls)
         {
