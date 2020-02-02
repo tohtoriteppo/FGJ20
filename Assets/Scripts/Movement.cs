@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
 
     private bool isGravity = false;
     private bool grounded = true;
-    private bool droppingThrough = false;
 
     private BoxCollider2D collider;
 
@@ -40,6 +39,9 @@ public class Movement : MonoBehaviour
 
     public GameObject oxygenBar;
 
+    private List<GameObject> closeObjects;
+    private GameObject platform;
+
     float mapX = 1f;
     float mapY = 1f;
 
@@ -51,7 +53,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        closeObjects = new List<GameObject>();
         var vertExtent = Camera.main.orthographicSize;
         var horzExtent = vertExtent * Screen.width / Screen.height;
 
@@ -143,17 +145,20 @@ public class Movement : MonoBehaviour
     {
         collider.enabled = true;
         onPlatform = false;
+        Debug.Log("RESTORED!");
     }
     private void PlatformIgnoring()
     {
         if(isGravity)
         {
+           // Debug.Log("Onplatform! "+onPlatform+ " grounded! " + grounded);
             if (onPlatform && vertical == -1)
             {
                 collider.enabled = false;
+                
                 Invoke("RestoreCollider", 0.3f*rb.gravityScale);
             }
-            else
+            else if (!onPlatform)
             {
                 bool ignore = rb.velocity.y > 0 || !isGravity;
                 Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, ignore);
@@ -170,7 +175,6 @@ public class Movement : MonoBehaviour
 
     private void RestrictBounds()
     {
-        Debug.Log("max: " + maxY + " : " + maxX);
         if (Mathf.Abs(transform.position.x) > minX || Mathf.Abs(transform.position.y) > minY)
         {
             rb.AddForce(new Vector2(-transform.position.x, -transform.position.y));
@@ -252,6 +256,21 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == platformLayer)
+        {
+            onPlatform = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == platformLayer)
+        {
+            onPlatform = false;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.contacts.Length > 0)
@@ -260,13 +279,10 @@ public class Movement : MonoBehaviour
             if (Vector2.Dot(contact.normal, Vector2.up) > 0.5)
             {
                 grounded = true;
-                if(collision.gameObject.layer == platformLayer)
+                //Debug.Log("name: " + collision.gameObject.name);
+                if (collision.gameObject.layer == platformLayer)
                 {
                     onPlatform = true;
-                }
-                else
-                {
-                    onPlatform = false;
                 }
             }
             else

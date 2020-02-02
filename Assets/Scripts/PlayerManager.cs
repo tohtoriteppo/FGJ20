@@ -16,10 +16,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] string pickupButton;
     [SerializeField] string repairButton;
 
-    private int wallLayer = 8;
     private int playerLayer = 9;
     private int passableLayer = 10;
-    private int platformLayer = 11;
 
     private Movement[] movements;
 

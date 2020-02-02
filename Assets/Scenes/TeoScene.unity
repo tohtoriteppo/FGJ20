@@ -581,6 +581,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &698426548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1760349696387022389, guid: 7a737eed326a94e46b15bfde3c01d033,
+    type: 3}
+  m_PrefabInstance: {fileID: 1760349696766532225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &698426554
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698426548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1016bf3afbe296d46900bca9277a5db0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &744621340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1107,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1760349696387022388, guid: 7a737eed326a94e46b15bfde3c01d033,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8793639957104055765, guid: 4e0b6a20c99b50a47b40c4cbc2927e0e,
+        type: 3}
     - target: {fileID: 1760349696387022389, guid: 7a737eed326a94e46b15bfde3c01d033,
         type: 3}
       propertyPath: m_Name
@@ -1543,6 +1574,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4035014140220659211, guid: c230fb244233b9a4b9a00303c6341e4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230fb244233b9a4b9a00303c6341e4e, type: 3}
 --- !u!224 &7612221240337386130 stripped
@@ -1674,6 +1710,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoseScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8890275233136368741, guid: 3de84572a449ee04fb3ba7b3e13a8959,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de84572a449ee04fb3ba7b3e13a8959, type: 3}
 --- !u!1 &7829664978664846470 stripped
@@ -1804,6 +1845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194482583065198659, guid: a85b860f13992384bb6278f8a8bd6f39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a85b860f13992384bb6278f8a8bd6f39, type: 3}

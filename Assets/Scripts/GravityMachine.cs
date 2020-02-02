@@ -12,7 +12,7 @@ public class GravityMachine : Machine
     {
         healthBar = Instantiate(healthBar, FindObjectOfType<Canvas>().transform);
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        healthBar.transform.position = new Vector2(pos.x, pos.y + 40);
+        healthBar.transform.position = new Vector2(pos.x, pos.y + 15);
         healthBar.GetComponent<Slider>().value = HP;
     }
 
@@ -20,7 +20,8 @@ public class GravityMachine : Machine
     {
         float oldHP = HP;
         HP = Mathf.Min(HP + value * (1 - ((HP-1) / (maxHP))), maxHP);
-        healthBar.GetComponent<Slider>().value = HP;
+        Debug.Log("value: " + value);
+        healthBar.GetComponent<Slider>().value = HP / maxHP * 100; ;
         return HP - oldHP; // Return amount repaired
     }
 

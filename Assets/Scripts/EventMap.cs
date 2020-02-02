@@ -177,9 +177,9 @@ public class EventMap : MonoBehaviour
                 decreasingTimer += derp;
                 Debug.Log(DistanceToTarget());
             }
-            Transform camera = gameObject.transform.GetChild(0);
-            camera.localPosition = new Vector3(-2.85f + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
-            camera.rotation = Quaternion.Euler(0, 0, -angleDegrees);
+            //Transform camera = gameObject.transform.GetChild(0);
+            //camera.localPosition = new Vector3(-2.85f + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
+            //camera.rotation = Quaternion.Euler(0, 0, -angleDegrees);
             ResourceUpdater();
         }
 

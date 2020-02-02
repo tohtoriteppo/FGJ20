@@ -12,18 +12,28 @@ public class GameController : MonoBehaviour
     
     private bool gameEnded = false;
     private bool gameStarted = false;
+    private bool initialized = false;
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    private void Initialize()
+    {
+        Transform canvas = FindObjectOfType<Canvas>().transform;
+        startScreen = Instantiate(startScreen, canvas);
+        winScreen = Instantiate(winScreen, canvas);
+        loseScreen = Instantiate(loseScreen, canvas);
         startScreen.SetActive(true);
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
+        initialized = true;
     }
-
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (!initialized) Initialize();
         if(!gameStarted)
         {
             if (Input.GetButtonDown("p1_button_x"))
@@ -51,5 +61,9 @@ public class GameController : MonoBehaviour
         else loseScreen.SetActive(true);
         gameStarted = false;
         gameEnded = true;
+    }
+    public bool GameStarted()
+    {
+        return gameStarted;
     }
 }

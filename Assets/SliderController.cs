@@ -9,7 +9,7 @@ public class SliderController : MonoBehaviour
     public GameObject EMPSlider;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Transform canvas = FindObjectOfType<Canvas>().transform;
         fuelSlider = Instantiate(fuelSlider, canvas);

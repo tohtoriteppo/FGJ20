@@ -9,7 +9,7 @@ abstract public class Damageable : MonoBehaviour
 
     private void Start()
     {
-        HP = maxHP;
+        //HP = maxHP;
     }
 
     abstract public float Repair(float value);
