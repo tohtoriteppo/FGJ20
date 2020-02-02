@@ -45,3 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   HP: 0
+  healthBar: {fileID: 0}
+  damageSounds: []
+  repairSounds:
+  - {fileID: 8300000, guid: 942ecfcdb691c3d1ba298f3b5345a7d1, type: 3}
+  - {fileID: 8300000, guid: 9731fa62681a5abd39b19bcad092da36, type: 3}
+  - {fileID: 8300000, guid: adac7cd3575f89bc69c0f9fa96db075a, type: 3}
+  minActivationHP: 0
