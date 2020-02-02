@@ -8,12 +8,14 @@ public abstract class Damageable : MonoBehaviour
 {
     public float maxHP;
     public float HP;
-    protected GameObject healthBar;
+    public GameObject healthBar;
 
 
     private AudioSource audioSource;
     public AudioClip[] damageSounds;
     public AudioClip[] repairSounds;
+
+    private float lastSoundPlayed = 0;
 
     public virtual void Start()
     {
@@ -27,6 +29,7 @@ public abstract class Damageable : MonoBehaviour
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
+        
     }
 
     public virtual float Repair(float value)
@@ -71,7 +74,11 @@ public abstract class Damageable : MonoBehaviour
     private void PlayRandomSound(AudioClip[] clips)
     {
         if (clips.Length == 0) return;
-        audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+        if (Time.time - lastSoundPlayed > 0.1f)
+        {
+            audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+            lastSoundPlayed = Time.time;
+        }   
     }
 
 
