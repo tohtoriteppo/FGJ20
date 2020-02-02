@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6123341028319424910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 3, z: 1}
+  m_LocalScale: {x: 3.3920822, y: 3.7596571, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: f88b1cce4e9cd556d8a3d8a45165e7a0, type: 3}
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 21300000, guid: 1e7e70ce6791ba44d8bb90cc62af8583, type: 3}
   m_Color: {r: 0, g: 0.8862745, b: 0.8862743, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,13 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e89131a7f5021ce91a60618917a3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 200
+  maxHP: 100
   HP: 0
   healthBar: {fileID: 0}
   damageSounds:
   - {fileID: 8300000, guid: 6bc8059058cb3a6b89263be198b4616a, type: 3}
   repairSounds: []
-  minActivationHP: 50
+  minActivationHP: 20
 --- !u!68 &3790048582007688648
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -118,16 +118,23 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.08053, y: -0.29322118}
-  - {x: -1.6723322, y: 1.1662202}
-  - {x: -0.78128505, y: 1.8784747}
-  - {x: 0.27610067, y: 2.1087809}
-  - {x: 1.1649605, y: 1.8535709}
-  - {x: 1.9412683, y: 1.18383}
-  - {x: 2.3781288, y: 0.35299644}
-  - {x: 2.3589668, y: -0.87709564}
-  - {x: 1.5938495, y: -1.9897332}
-  - {x: 0.23113112, y: -2.5417848}
-  - {x: -1.2294363, y: -1.9413586}
-  - {x: -1.8649489, y: -1.2244179}
-  - {x: -2.0725007, y: -0.26192445}
+  - {x: 3.4726636, y: -0.122970164}
+  - {x: 3.2112877, y: -0.66444623}
+  - {x: 2.2662115, y: -1.3342005}
+  - {x: 1.0595483, y: -1.6757376}
+  - {x: -0.14977753, y: -1.730299}
+  - {x: -1.1749526, y: -1.637051}
+  - {x: -2.2089703, y: -1.3386041}
+  - {x: -3.0102174, y: -0.8944908}
+  - {x: -3.426511, y: -0.38485563}
+  - {x: -3.4837053, y: 0.16108052}
+  - {x: -3.3250558, y: 0.5188417}
+  - {x: -2.9319513, y: 0.9714184}
+  - {x: -2.1514666, y: 1.3901652}
+  - {x: -1.3885347, y: 1.641926}
+  - {x: -0.20388879, y: 1.767672}
+  - {x: 0.7732448, y: 1.6763302}
+  - {x: 1.9009231, y: 1.4652029}
+  - {x: 2.9227002, y: 0.9729518}
+  - {x: 3.385989, y: 0.42954293}
+  - {x: 3.4995184, y: -0.007603012}
