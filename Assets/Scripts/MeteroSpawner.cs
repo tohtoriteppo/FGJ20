@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeteroSpawner : MonoBehaviour
 {
     public GameObject meteroPrefab;
-    public float radii = 13f;
+    float radii = 14f;
     public Vector2 upLeft;
     public Vector2 botRight;
     
