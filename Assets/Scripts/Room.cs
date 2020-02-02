@@ -6,9 +6,18 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public bool test = false;
-    public bool gravity = true;
+    public bool roomGravity = true;
     public bool roomChecked = false;
     public List<Wall> walls = new List<Wall>();
+
+    private GravityMachine globalGravitySource;
+    private bool globalGravity
+    {
+        get
+        {
+            return globalGravitySource.HasGravity();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,19 +35,16 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+        globalGravitySource = FindObjectOfType<GravityMachine>();
         UpdateColor();
     }
 
     private void Update()
     {
-        if (test)
-        {
-            test = false;
-            SetGravity(!gravity);
-        }
+        SetGravity();
     }
 
-    public void SetGravity(bool gravityEnabled)
+    public void TraverseGravity(bool gravityEnabled)
     {
         ResetVisited();
         bool hullBroken = SetGravityRecursive(gravityEnabled);
@@ -58,11 +64,16 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void SetGravity()
+    {
+        GetComponent<Collider2D>().enabled = globalGravity && roomGravity;
+    }
+
     public bool SetGravityRecursive(bool newGravity)
     {
         roomChecked = true;
-        gravity = newGravity;
-        GetComponent<Collider2D>().enabled = newGravity;
+        roomGravity = newGravity;
+        SetGravity();
         bool hullBroken = false;
         foreach (Wall wall in walls)
         {
@@ -99,13 +110,13 @@ public class Room : MonoBehaviour
 
     private void UpdateColor()
     {
-        if (gravity) GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.2f);
+        if (roomGravity) GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.2f);
         else GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.05f);
     }
    
 
     public bool HasGravity()
     {
-        return gravity;
+        return roomGravity;
     }
 }

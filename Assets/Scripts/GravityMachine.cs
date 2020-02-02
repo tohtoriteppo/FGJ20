@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GravityMachine : Machine
 {
-    public float minActivationHP = 0;
+    public float minActivationHP;
     public GameObject healthBar;
 
     void Start()
@@ -30,6 +30,7 @@ public class GravityMachine : Machine
         float oldHP = HP;
         HP = Mathf.Max(HP - value, 0);
         healthBar.GetComponent<Slider>().value = HP;
+
         return oldHP - HP; // Return amount damaged
     }
 

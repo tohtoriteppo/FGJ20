@@ -60,7 +60,7 @@ public class Wall : Damageable
             broken = false;
             foreach (Room room in rooms)
             {
-                room.SetGravity(true);
+                room.TraverseGravity(true);
             }
             UpdateCollider();
             
@@ -79,7 +79,7 @@ public class Wall : Damageable
             broken = true;
             foreach (Room room in rooms)
             {
-                room.SetGravity(!IsOuterHull());  // TODO: Its unnecessary to set gravity for both rooms
+                room.TraverseGravity(!IsOuterHull());  // TODO: Its unnecessary to set gravity for both rooms
                 
 
             }
