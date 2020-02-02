@@ -10,6 +10,11 @@ public abstract class Damageable : MonoBehaviour
     public float HP;
     protected GameObject healthBar;
 
+
+    private AudioSource audioSource;
+    public AudioClip[] damageSounds;
+    public AudioClip[] repairSounds;
+
     public virtual void Start()
     {
         HP = maxHP;
@@ -20,6 +25,8 @@ public abstract class Damageable : MonoBehaviour
             healthBar.transform.position = new Vector2(pos.x, pos.y + 15);
             healthBar.GetComponent<Slider>().value = HP;
         }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public virtual float Repair(float value)
@@ -27,7 +34,7 @@ public abstract class Damageable : MonoBehaviour
         float oldHP = HP;
         HP = Mathf.Min(HP + value * (1 - ((HP-1) / (maxHP))), maxHP);
         float repairAmount = HP - oldHP;
-        PlayRepairSound(repairAmount);
+        PlayRepairSound();
         UpdateHealthBar();
         UpdateState();
         return repairAmount; // Return amount repaired
@@ -38,7 +45,7 @@ public abstract class Damageable : MonoBehaviour
         float oldHP = HP;
         HP = Mathf.Max(HP - value, 0);
         float damageAmount = oldHP - HP;
-        PlayDamageSound(damageAmount);
+        PlayDamageSound();
         UpdateHealthBar();
         UpdateState();
         return damageAmount; // Return amount damaged
@@ -51,15 +58,22 @@ public abstract class Damageable : MonoBehaviour
 
     protected abstract void UpdateState();
 
-    protected virtual void PlayDamageSound(float damageAmount)
+    protected virtual void PlayDamageSound()
     {
-        
+        PlayRandomSound(damageSounds);
     }
 
-    protected virtual void PlayRepairSound(float repairAmount)
+    protected virtual void PlayRepairSound()
     {
-        
+        PlayRandomSound(repairSounds);
     }
+
+    private void PlayRandomSound(AudioClip[] clips)
+    {
+        if (clips.Length == 0) return;
+        audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+    }
+
 
     public virtual bool CanBeRepaired()
     {
