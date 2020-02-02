@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private bool jumpingThrough;
 
-    private int playerLayer = 9;
+    public int playerLayer = 9;
     private int platformLayer = 11;
     private bool onPlatform;
 
@@ -57,8 +57,6 @@ public class Movement : MonoBehaviour
         var vertExtent = Camera.main.orthographicSize;
         var horzExtent = vertExtent * Screen.width / Screen.height;
 
-        Debug.Log("horz: "+ horzExtent);
-        Debug.Log("vert: "+ vertExtent);
         // Calculations assume map is position at the origin
         minX = horzExtent - mapX / 2.0f;
         maxX = mapX / 2.0f - horzExtent;
@@ -89,9 +87,9 @@ public class Movement : MonoBehaviour
             TestGravity();
             Jump();
             DecreaseOxygen();
+            Navigate();
         }
         SetSpeeds();
-
     }
 
     
@@ -100,6 +98,7 @@ public class Movement : MonoBehaviour
     {
         PlatformIgnoring();
         if(!dead) Move();
+
         Animate();
         RestrictBounds();
     }
@@ -114,6 +113,8 @@ public class Movement : MonoBehaviour
             if (oxygenLevel < 0) Die();
         }
     }
+
+    
     private void Die()
     {
         //die animations etc
@@ -144,7 +145,7 @@ public class Movement : MonoBehaviour
     private void RestoreCollider()
     {
         collider.enabled = true;
-        onPlatform = false;
+        //onPlatform = false;
         platform.GetComponent<Collider2D>().enabled = true;
         Debug.Log("RESTORED!");
     }
@@ -152,12 +153,12 @@ public class Movement : MonoBehaviour
     {
         if(isGravity)
         {
-           // Debug.Log("Onplatform! "+onPlatform+ " grounded! " + grounded);
+            Debug.Log("playernum: "+playerNum+ " platform: "+onPlatform+ " grounded! " + grounded);
             if (onPlatform && vertical == -1)
             {
                 //collider.enabled = false;
                 platform.GetComponent<Collider2D>().enabled = false;
-                Invoke("RestoreCollider", 0.3f*rb.gravityScale);
+                Invoke("RestoreCollider", 0.4f*rb.gravityScale);
             }
             else if (!onPlatform)
             {
@@ -246,7 +247,7 @@ public class Movement : MonoBehaviour
     }
     IEnumerator SetGrav(bool on)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         isGravity = on;
         rb.gravityScale = isGravity ? 1 : 0;
         if (isGravity)
@@ -286,7 +287,7 @@ public class Movement : MonoBehaviour
             if (Vector2.Dot(contact.normal, Vector2.up) > 0.5)
             {
                 grounded = true;
-                //Debug.Log("name: " + collision.gameObject.name);
+                Debug.Log("name: " + collision.gameObject.name);
                 if (collision.gameObject.layer == platformLayer)
                 {
                     onPlatform = true;

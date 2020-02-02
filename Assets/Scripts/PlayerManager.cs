@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Lose()
     {
-
+        FindObjectOfType<GameController>().EndGame(false);
     }
 
     private bool CheckLose()

@@ -199,7 +199,7 @@ public class EventMap : MonoBehaviour
             if (decreasingTimer <= 0.0f)
             {
                 decreasingTimer += derp;
-                Debug.Log(DistanceToTarget());
+                //Debug.Log(DistanceToTarget());
                 if (emp != 0.0f)
                 {
                     empDamage();

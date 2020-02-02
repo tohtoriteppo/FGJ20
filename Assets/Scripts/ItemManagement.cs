@@ -39,6 +39,7 @@ public class ItemManagement : MonoBehaviour
         Throw();
         PickUp();
         Repair();
+        Navigate();
     }
     private void FixedUpdate()
     {
@@ -60,6 +61,7 @@ public class ItemManagement : MonoBehaviour
                 {
                     dmg.Repair(repairAmount);
                 }
+               
             }
         }
     }
@@ -88,6 +90,22 @@ public class ItemManagement : MonoBehaviour
             item = null;
             charging = false;
         }
+    }
+
+    private void Navigate()
+    {
+        float vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical");
+        if(vertical != 0)
+        {
+            foreach (GameObject obj in objectsClose)
+            {
+                if (obj.tag == "navigator")
+                {
+                    
+                }
+            }
+        }
+        
     }
 
     private void PickUp()

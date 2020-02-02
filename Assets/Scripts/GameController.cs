@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
 
-    public GameObject startScreen;
-    public GameObject winScreen;
-    public GameObject loseScreen;
-
     private AudioSource musicPlayer;
     public AudioClip gameMusic;
     public AudioClip winMusic;
