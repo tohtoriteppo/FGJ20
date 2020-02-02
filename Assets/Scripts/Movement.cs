@@ -128,7 +128,6 @@ public class Movement : Damageable
             TestGravity();
             Jump();
             DecreaseOxygen();
-            Navigate();
         }
         SetSpeeds();
     }

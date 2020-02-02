@@ -101,7 +101,7 @@ public class ItemManagement : MonoBehaviour
             {
                 if (obj.tag == "navigator")
                 {
-                    
+                    obj.GetComponent<Navigator>().Navigate((int)vertical);
                 }
             }
         }
