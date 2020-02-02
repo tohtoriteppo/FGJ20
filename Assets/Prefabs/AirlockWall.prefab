@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5039519062164083995}
   - component: {fileID: 8488133633854342793}
   m_Layer: 10
-  m_Name: Airlock
+  m_Name: AirlockWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7575842308819304660}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 4.04, y: -5.02571, z: 0.34238282}
-  m_LocalScale: {x: 200.00002, y: 15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5acccb43130eb2a44819289b3c96661f, type: 3}
-  m_Color: {r: 0, g: 0.7019608, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3dc48777589c99c4fb0a75c8f68859aa, type: 3}
+  m_Color: {r: 1, g: 0.9883604, b: 0.5707547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,14 +101,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.01, y: 0.01}
+    oldSize: {x: 2.1953125, y: 0.1953125}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01}
+  m_Size: {x: 2, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &5039519062164083995
 MonoBehaviour:
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 200
-  brokenColor: {r: 1, g: 0, b: 0, a: 0.2901961}
-  solidColor: {r: 1, g: 0, b: 0, a: 1}
+  HP: 0
+  brokenAlpha: 0.1
   broken: 0
   state: 0
   rooms: []
