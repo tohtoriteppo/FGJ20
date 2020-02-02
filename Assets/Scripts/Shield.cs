@@ -31,6 +31,7 @@ public class Shield : Damageable
         {
             Color color = spriteRenderer.color;
             color.a = HP / maxHP;
+            if (HP < minActivationHP) color.a = 0;
             spriteRenderer.color = color;
         }
     }
