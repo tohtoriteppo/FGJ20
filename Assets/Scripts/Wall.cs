@@ -65,7 +65,7 @@ public class Wall : Damageable
         bool newState = HP <= 0;
         if (newState != broken)
         {
-            broken = true;
+            broken = newState;
             foreach (Room room in rooms)
             {
                 bool gravityOn = !IsOuterHull() && !broken;
