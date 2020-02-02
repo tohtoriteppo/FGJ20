@@ -10,6 +10,9 @@ public class Room : MonoBehaviour
     public bool roomChecked = false;
     public List<Wall> walls = new List<Wall>();
 
+    private Color originalColor;
+    public Color noGravityColor;
+
     private GravityMachine globalGravitySource;
     private bool globalGravity
     {
@@ -35,6 +38,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+        originalColor = GetComponent<SpriteRenderer>().color;
         globalGravitySource = FindObjectOfType<GravityMachine>();
         UpdateColor();
     }
@@ -110,8 +114,8 @@ public class Room : MonoBehaviour
 
     private void UpdateColor()
     {
-        if (roomGravity) GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.2f);
-        else GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f, 0.05f);
+        if (roomGravity) GetComponent<SpriteRenderer>().color = originalColor;
+        else GetComponent<SpriteRenderer>().color = noGravityColor;
     }
    
 
