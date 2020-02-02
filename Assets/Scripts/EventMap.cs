@@ -20,22 +20,36 @@ public class EventMap : MonoBehaviour
 
     public float cameraStartX = -2.5f;
 
+    public float empDamageMultiplier = 1.0f;
+
     public int radius = 5;
+
+    public int numberOfMachines = 2;
 
     float fuel = 0.0f;
     float emp = 0.0f;
     float meteors = 0.0f;
     //float decreasingTimer = 0.0f;
 
+    Machine[] machines;
+
     Color[] pixels;
     // Start is called before the first frame update
     void Start()
     {
+        machines = new Machine[numberOfMachines];
         Debug.Log("Withd " + mapTexture.width + " Height " + mapTexture.height);
         shipLocation = new Vector2(0, mapTexture.height/2);
         speedVector = new Vector2(speed, 0.0f);
         pixels = mapTexture.GetPixels(0, 0, mapTexture.width, mapTexture.height);
-        
+
+        int i = 0;
+
+        foreach (Machine masiina in FindObjectsOfType<Machine>())
+        {
+            machines[i++] = masiina;
+        }
+
         for (int y = 0; y < mapTexture.height; y++)
         {
             for (int x = 0; x < mapTexture.width; x++)
@@ -140,6 +154,14 @@ public class EventMap : MonoBehaviour
         updateAngle(i * Mathf.Deg2Rad);
     }
 
+    public void empDamage()
+    {
+        foreach (Machine masiina in machines)
+        {
+            masiina.Damage(emp * empDamageMultiplier);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -178,6 +200,10 @@ public class EventMap : MonoBehaviour
             {
                 decreasingTimer += derp;
                 Debug.Log(DistanceToTarget());
+                if (emp != 0.0f)
+                {
+                    empDamage();
+                }
             }
             Transform camera = gameObject.transform.GetChild(0);
             camera.localPosition = new Vector3(cameraStartX + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
