@@ -82,7 +82,7 @@ public class Wall : Damageable
         bool newState = HP <= 0;
         if (newState != broken)
         {
-            broken = true;
+            broken = newState;
             foreach (Room room in rooms)
             {
                 bool gravityOn = !IsOuterHull() && !broken;
@@ -106,6 +106,6 @@ public class Wall : Damageable
     void UpdateCollider()
     {
         //GetComponent<Collider2D>().enabled = !broken;
-        GetComponent<Collider2D>().isTrigger = broken;
+        GetComponent<Collider2D>().isTrigger = broken || state == WallState.None;
     }
 }
