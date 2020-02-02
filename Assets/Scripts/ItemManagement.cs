@@ -51,8 +51,8 @@ public class ItemManagement : MonoBehaviour
 
     private void Repair()
     {
-        if (Input.GetButton("p" + playerNum + repairString) && item != null)
-        {
+        if (Input.GetButton("p" + playerNum + repairString) /* && item != null */)
+        { //                                                  ^ Uncomment when tools are tooling
             foreach (GameObject obj in objectsClose)
             {
                 Damageable dmg = obj.GetComponent<Damageable>();
