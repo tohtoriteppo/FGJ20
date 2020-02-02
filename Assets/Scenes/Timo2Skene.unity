@@ -741,6 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
+  oxygenBar: {fileID: 0}
 --- !u!212 &167401189
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -867,8 +868,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5, y: 2}
+  m_DrawMode: 2
+  m_Size: {x: 7, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -924,6 +925,7 @@ MonoBehaviour:
   angleDegrees: 0
   derp: 1
   speedVector: {x: 0, y: 0}
+  radius: 5
 --- !u!1 &195083631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,6 +2015,11 @@ MonoBehaviour:
   jumpForce: 6
   throwForce: 10
   throwChargeTime: 2
+  repairAmount: 0
+  oxygenDecrease: 0
+  jumpButton: 
+  pickupButton: 
+  repairButton: 
 --- !u!4 &481159755
 Transform:
   m_ObjectHideFlags: 0
@@ -4332,7 +4339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535139589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.854, y: 0.983, z: -6.95}
+  m_LocalPosition: {x: -2.85, y: 0.983, z: -6.95}
   m_LocalScale: {x: 1, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 189550151}

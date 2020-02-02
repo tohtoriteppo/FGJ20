@@ -18,6 +18,8 @@ public class EventMap : MonoBehaviour
     public Vector2 speedVector = Vector2.zero;
     Vector2 helper = Vector2.zero;
 
+    public float cameraStartX = -2.5f;
+
     public int radius = 5;
 
     float fuel = 0.0f;
@@ -33,7 +35,7 @@ public class EventMap : MonoBehaviour
         shipLocation = new Vector2(0, mapTexture.height/2);
         speedVector = new Vector2(speed, 0.0f);
         pixels = mapTexture.GetPixels(0, 0, mapTexture.width, mapTexture.height);
-        /*
+        
         for (int y = 0; y < mapTexture.height; y++)
         {
             for (int x = 0; x < mapTexture.width; x++)
@@ -41,7 +43,7 @@ public class EventMap : MonoBehaviour
                 Color pixel = pixels[y * mapTexture.width + x];
             }
         }
-        */
+        
     }
 
 
@@ -177,9 +179,9 @@ public class EventMap : MonoBehaviour
                 decreasingTimer += derp;
                 Debug.Log(DistanceToTarget());
             }
-            //Transform camera = gameObject.transform.GetChild(0);
-            //camera.localPosition = new Vector3(-2.85f + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
-            //camera.rotation = Quaternion.Euler(0, 0, -angleDegrees);
+            Transform camera = gameObject.transform.GetChild(0);
+            camera.localPosition = new Vector3(cameraStartX + 1.0f*newX/100, 1 - 1.0f*newY/100, -1f);
+            camera.rotation = Quaternion.Euler(0, 0, -angleDegrees);
             ResourceUpdater();
         }
 
