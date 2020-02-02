@@ -10,7 +10,7 @@ public class EventMap : MonoBehaviour
     [Range(0.5f, 10f)]
     public float speed = 1.0f;
     [Range(-45,45)]
-    public int angleDegrees = 0;
+    public float angleDegrees = 0;
     float angle = 0.0f;
     [Range(0.2f,5f)]
     public float derp = 1.0f;
@@ -26,10 +26,14 @@ public class EventMap : MonoBehaviour
 
     public int numberOfMachines = 2;
 
+    [Range(-1,1)]
+    public int turnDirection = 0;
+
     float fuel = 0.0f;
     float emp = 0.0f;
     float meteors = 0.0f;
-    //float decreasingTimer = 0.0f;
+
+    public float hattuvakio = 4.0f;
 
     Machine[] machines;
 
@@ -143,15 +147,15 @@ public class EventMap : MonoBehaviour
     }
 
     //Radians
-    public void updateAngle(float f)
+    public void updateAngleRads(float f)
     {
         angle = f;
     }
 
     //Degrees
-    public void updateAngle(int i)
+    public void updateAngleDegrees(float i)
     {
-        updateAngle(i * Mathf.Deg2Rad);
+        updateAngleRads(i * Mathf.Deg2Rad);
     }
 
     public void empDamage()
@@ -161,11 +165,16 @@ public class EventMap : MonoBehaviour
             masiina.Damage(emp * empDamageMultiplier);
         }
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        updateAngle(angleDegrees);
+        if (turnDirection != 0) {
+            angleDegrees += turnDirection * hattuvakio * Time.deltaTime;
+        }
+        angleDegrees = Mathf.Clamp(angleDegrees, -45, 45);
+        updateAngleDegrees(angleDegrees);
         updateVector();
         helper = Time.deltaTime * speedVector;
         int newX = (int)(helper.x + shipLocation.x);
