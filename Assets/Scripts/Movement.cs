@@ -145,6 +145,7 @@ public class Movement : MonoBehaviour
     {
         collider.enabled = true;
         onPlatform = false;
+        platform.GetComponent<Collider2D>().enabled = true;
         Debug.Log("RESTORED!");
     }
     private void PlatformIgnoring()
@@ -154,8 +155,8 @@ public class Movement : MonoBehaviour
            // Debug.Log("Onplatform! "+onPlatform+ " grounded! " + grounded);
             if (onPlatform && vertical == -1)
             {
-                collider.enabled = false;
-                
+                //collider.enabled = false;
+                platform.GetComponent<Collider2D>().enabled = false;
                 Invoke("RestoreCollider", 0.3f*rb.gravityScale);
             }
             else if (!onPlatform)
@@ -241,6 +242,11 @@ public class Movement : MonoBehaviour
     }
     public void SetGravity(bool on)
     {
+        StartCoroutine( SetGrav(on));
+    }
+    IEnumerator SetGrav(bool on)
+    {
+        yield return new WaitForSeconds(0.3f);
         isGravity = on;
         rb.gravityScale = isGravity ? 1 : 0;
         if (isGravity)
@@ -255,6 +261,7 @@ public class Movement : MonoBehaviour
             rb.freezeRotation = true;
         }
     }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -283,6 +290,7 @@ public class Movement : MonoBehaviour
                 if (collision.gameObject.layer == platformLayer)
                 {
                     onPlatform = true;
+                    platform = collision.gameObject;
                 }
             }
             else

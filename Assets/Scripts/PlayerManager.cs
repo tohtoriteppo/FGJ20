@@ -76,7 +76,7 @@ public class PlayerManager : MonoBehaviour
     }
     public float GetRepairAmount()
     {
-        return throwChargeTime;
+        return repairAmount;
     }
     public float GetOxygenDecrease()
     {

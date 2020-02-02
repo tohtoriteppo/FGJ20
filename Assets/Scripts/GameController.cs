@@ -9,18 +9,31 @@ public class GameController : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+    private AudioSource musicPlayer;
+    public AudioClip gameMusic;
+    public AudioClip winMusic;
+    
+
+    //private AudioListener listener;
     
     private bool gameEnded = false;
     private bool gameStarted = false;
     private bool initialized = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //listener = GetComponent<AudioListener>();
+        musicPlayer = GetComponent<AudioSource>();
+        musicPlayer.clip = gameMusic;
+        musicPlayer.Play();
     }
     private void Initialize()
     {
         Transform canvas = FindObjectOfType<Canvas>().transform;
+        
         startScreen = Instantiate(startScreen, canvas);
         winScreen = Instantiate(winScreen, canvas);
         loseScreen = Instantiate(loseScreen, canvas);
@@ -32,7 +45,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (!initialized) Initialize();
         if(!gameStarted)
         {
@@ -57,10 +70,23 @@ public class GameController : MonoBehaviour
     }
     public void EndGame(bool win)
     {
-        if (win) winScreen.SetActive(true);
-        else loseScreen.SetActive(true);
+        if (win) Win();
+        else Lose();
         gameStarted = false;
         gameEnded = true;
+    }
+
+    private void Lose()
+    {
+        loseScreen.SetActive(true);
+    }
+
+    private void Win()
+    {
+        winScreen.SetActive(true);
+        musicPlayer.Stop();
+        musicPlayer.clip = winMusic;
+        musicPlayer.Play();
     }
     public bool GameStarted()
     {

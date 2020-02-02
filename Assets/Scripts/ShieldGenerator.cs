@@ -21,7 +21,7 @@ public class ShieldGenerator : Machine
 
     private void Update()
     {
-       // if (shield) shield.Repair(maxRepairRate * HP / maxHP * Time.deltaTime);
+       if (shield) shield.Repair(maxRepairRate * HP / maxHP * Time.deltaTime);
     }
 
     override public float Repair(float value)
