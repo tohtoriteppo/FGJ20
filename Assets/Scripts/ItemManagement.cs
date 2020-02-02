@@ -57,7 +57,7 @@ public class ItemManagement : MonoBehaviour
             foreach (GameObject obj in objectsClose)
             {
                 Damageable dmg = obj.GetComponent<Damageable>();
-                if (dmg != null)
+                if (dmg != null && dmg.CanBeRepaired())
                 {
                     dmg.Repair(repairAmount);
                 }

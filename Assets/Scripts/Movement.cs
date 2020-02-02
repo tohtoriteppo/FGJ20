@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Movement : MonoBehaviour
+public class Movement : Damageable
 {
 
     [SerializeField] int playerNum = 1;
@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour
     private int platformLayer = 11;
     private bool onPlatform;
 
+    private float maxOxygen = 1;
     private float oxygenLevel = 1;
     private float oxygenDecrease;
 
@@ -49,10 +50,21 @@ public class Movement : MonoBehaviour
     private float maxX;
     private float minY;
     private float maxY;
+    
+    private OxygenGenerator oxygenGenerator;
+    private bool oxygenGeneratorOnline
+    {
+        get
+        {
+            if (!oxygenGenerator) return true;
+            return oxygenGenerator.HasOxygen();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        oxygenGenerator = FindObjectOfType<OxygenGenerator>();
         closeObjects = new List<GameObject>();
         var vertExtent = Camera.main.orthographicSize;
         var horzExtent = vertExtent * Screen.width / Screen.height;
@@ -75,6 +87,35 @@ public class Movement : MonoBehaviour
         oxygenBar = Instantiate(oxygenBar, FindObjectOfType<Canvas>().transform);
         oxygenBar.SetActive(false);
         SetGravity(true);
+    }
+
+    public override float Repair(float value)
+    {
+        oxygenLevel = Mathf.Min(oxygenLevel + value, maxOxygen);
+        if (dead && oxygenLevel >= 1)
+        {
+            dead = false;
+        }
+        oxygenBar.SetActive(false);
+        return 1; //FIXME if you need actual return value
+    }
+
+    public override float Damage(float value)
+    {
+        oxygenLevel = Mathf.Max(oxygenLevel - value, 0);
+        DecreaseOxygen(); // FIXME: oxygen is reduced twice
+        return 1; //FIXME if you need actual return value
+    }
+
+
+    protected override void UpdateState()
+    {
+    }
+
+    public override bool CanBeRepaired()
+    {
+        // Only dead people can be given more oxygen to prevent abuse
+        return dead;
     }
 
     // Update is called once per frame
@@ -104,7 +145,7 @@ public class Movement : MonoBehaviour
     }
     private void DecreaseOxygen()
     {
-        if(!isGravity)
+        if(!isGravity || !oxygenGeneratorOnline)
         {
             oxygenLevel -= oxygenDecrease;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -123,7 +164,7 @@ public class Movement : MonoBehaviour
     }
     public void Resurrect()
     {
-        oxygenLevel = 1;
+        oxygenLevel = maxOxygen;
     }
     private void Jump()
     {
@@ -250,7 +291,7 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         isGravity = on;
         rb.gravityScale = isGravity ? 1 : 0;
-        if (isGravity)
+        if (isGravity && oxygenGeneratorOnline)
         {
             oxygenLevel = 1;
             oxygenBar.SetActive(false);
