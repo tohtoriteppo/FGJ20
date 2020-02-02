@@ -50,10 +50,21 @@ public class Movement : Damageable
     private float maxX;
     private float minY;
     private float maxY;
+    
+    private OxygenGenerator oxygenGenerator;
+    private bool oxygenGeneratorOnline
+    {
+        get
+        {
+            if (!oxygenGenerator) return true;
+            return oxygenGenerator.HasOxygen();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        oxygenGenerator = FindObjectOfType<OxygenGenerator>();
         closeObjects = new List<GameObject>();
         var vertExtent = Camera.main.orthographicSize;
         var horzExtent = vertExtent * Screen.width / Screen.height;
@@ -87,7 +98,7 @@ public class Movement : Damageable
         {
             dead = false;
         }
-
+        oxygenBar.SetActive(false);
         return 1; //FIXME if you need actual return value
     }
 
@@ -135,7 +146,7 @@ public class Movement : Damageable
     }
     private void DecreaseOxygen()
     {
-        if(!isGravity)
+        if(!isGravity || !oxygenGeneratorOnline)
         {
             oxygenLevel -= oxygenDecrease;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -279,7 +290,7 @@ public class Movement : Damageable
         yield return new WaitForSeconds(0.3f);
         isGravity = on;
         rb.gravityScale = isGravity ? 1 : 0;
-        if (isGravity)
+        if (isGravity && oxygenGeneratorOnline)
         {
             oxygenLevel = 1;
             oxygenBar.SetActive(false);
