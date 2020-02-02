@@ -97,6 +97,7 @@ public class Movement : Damageable
             dead = false;
         }
         oxygenBar.SetActive(false);
+        PlayRepairSound();
         return 1; //FIXME if you need actual return value
     }
 
@@ -104,6 +105,7 @@ public class Movement : Damageable
     {
         oxygenLevel = Mathf.Max(oxygenLevel - value, 0);
         DecreaseOxygen(); // FIXME: oxygen is reduced twice
+        PlayDamageSound();
         return 1; //FIXME if you need actual return value
     }
 
