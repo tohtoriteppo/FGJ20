@@ -25,6 +25,9 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         Physics2D.IgnoreLayerCollision(passableLayer, playerLayer);
+        Physics2D.IgnoreLayerCollision(passableLayer, 12);
+        Physics2D.IgnoreLayerCollision(passableLayer, 13);
+        Physics2D.IgnoreLayerCollision(passableLayer, 14);
         movements = FindObjectsOfType<Movement>();
     }
 

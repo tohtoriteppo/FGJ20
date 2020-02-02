@@ -238,6 +238,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoseScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8890275233136368741, guid: 3de84572a449ee04fb3ba7b3e13a8959,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de84572a449ee04fb3ba7b3e13a8959, type: 3}
 --- !u!224 &328564207 stripped

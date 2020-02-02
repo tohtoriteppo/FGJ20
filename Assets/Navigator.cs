@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Navigator : MonoBehaviour
+public class Navigator : Machine
 {
 
     private int direction = 0;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -23,4 +23,12 @@ public class Navigator : MonoBehaviour
     {
         direction = dir;
     }
+
+
+    protected override void UpdateState()
+    {
+    }
+
 }
+
+

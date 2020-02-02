@@ -238,6 +238,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4035014140220659211, guid: c230fb244233b9a4b9a00303c6341e4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230fb244233b9a4b9a00303c6341e4e, type: 3}
 --- !u!224 &266750565 stripped
