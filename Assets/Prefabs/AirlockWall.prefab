@@ -124,6 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 200
   HP: 0
+  healthBar: {fileID: 321821629695649029, guid: ed9c3666324bbb34aa28f4329200124a,
+    type: 3}
   damageSounds:
   - {fileID: 8300000, guid: ef1c5757e67bd56a2831d938b9bbdf4d, type: 3}
   - {fileID: 8300000, guid: bcaec5f098ac1f44692c99f2dd581861, type: 3}

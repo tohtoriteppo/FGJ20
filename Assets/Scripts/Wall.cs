@@ -28,6 +28,14 @@ public class Wall : Damageable
         UpdateColor();
     }
 
+    public override void Start()
+    {
+        base.Start();
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        healthBar.transform.position = new Vector2(pos.x, pos.y);
+
+    }
+
     public void AddRoom(Room room)
     {
         if (rooms.Contains(room))
@@ -57,10 +65,19 @@ public class Wall : Damageable
         return rooms.Count < 2;
     }
 
+    public override float Repair(float value)
+    {
+        float oldHP = HP;
+        HP = Mathf.Min(HP + value, maxHP);
+        float repairAmount = HP - oldHP;
+        PlayRepairSound();
+        UpdateHealthBar();
+        UpdateState();
+        return repairAmount; // Return amount repaired
+    }
 
 
     protected override void UpdateState()
-
     {
         bool newState = HP <= 0;
         if (newState != broken)

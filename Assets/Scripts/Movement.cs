@@ -150,7 +150,7 @@ public class Movement : Damageable
         {
             oxygenLevel -= oxygenDecrease;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            oxygenBar.transform.position = new Vector2(pos.x, pos.y + 20);
+            oxygenBar.transform.position = new Vector2(pos.x, pos.y + 35);
             oxygenBar.GetComponent<Slider>().value = oxygenLevel;
             if (oxygenLevel < 0) Die();
         }

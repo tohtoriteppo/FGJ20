@@ -24,10 +24,10 @@ public abstract class Damageable : MonoBehaviour
         {
             healthBar = Instantiate(healthBar, FindObjectOfType<Canvas>().transform);
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            healthBar.transform.position = new Vector2(pos.x, pos.y + 15);
+            healthBar.transform.position = new Vector2(pos.x, pos.y + 40);
             healthBar.GetComponent<Slider>().value = HP;
         }
-
+        UpdateHealthBar();
         audioSource = gameObject.AddComponent<AudioSource>();
         
     }
@@ -56,7 +56,13 @@ public abstract class Damageable : MonoBehaviour
 
     protected virtual void UpdateHealthBar()
     {
-        if (healthBar) healthBar.GetComponent<Slider>().value = HP / maxHP * 100; ;
+        if(healthBar != null)
+        {
+            if (healthBar) healthBar.GetComponent<Slider>().value = HP / maxHP * 100;
+            if (HP == maxHP) healthBar.SetActive(false);
+            else healthBar.SetActive(true);
+        }
+        
     }
 
     protected abstract void UpdateState();
