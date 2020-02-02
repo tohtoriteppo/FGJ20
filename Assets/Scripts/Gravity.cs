@@ -43,6 +43,7 @@ public class Gravity : MonoBehaviour
             }
             if (gravity_count == 0)
             {
+                Debug.Log("Okei?");
                  parent_movement.SetGravity(false);
             }
         }
