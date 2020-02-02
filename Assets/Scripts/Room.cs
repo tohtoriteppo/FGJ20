@@ -18,6 +18,7 @@ public class Room : MonoBehaviour
     {
         get
         {
+            if (!globalGravitySource) return true;
             return globalGravitySource.HasGravity();
         }
     }

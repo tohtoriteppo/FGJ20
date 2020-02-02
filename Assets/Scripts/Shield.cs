@@ -14,27 +14,10 @@ public class Shield : Damageable
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    protected override void UpdateState()
     {
-        
-    }
-
-    override public float Repair(float value)
-    {
-        float oldHP = HP;
-        HP = Mathf.Min(HP + value, maxHP);
         UpdateCollider();
         UpdateColor();
-        return HP - oldHP; // Return amount repaired
-    }
-
-    override public float Damage(float value)
-    {
-        float oldHP = HP;
-        HP = Mathf.Max(HP - value, 0);
-        UpdateCollider();
-        UpdateColor();
-        return oldHP - HP; // Return amount damaged
     }
 
     private void UpdateCollider()

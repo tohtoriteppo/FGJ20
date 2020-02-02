@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-abstract public class Machine : Damageable
+public abstract class Machine : Damageable
 {
-
 }

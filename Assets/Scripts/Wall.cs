@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Wall : Damageable
@@ -31,9 +32,13 @@ public class Wall : Damageable
     {
         if (rooms.Contains(room))
         {
-            Debug.LogError("This room is already registered to this wall1");
+            Debug.LogError(name + " - " + room.name + ": This room is already registered to this wall1");
         }
         rooms.Add(room);
+        if (rooms.Count > 2)
+        {
+            Debug.LogError(name + " - " + room.name + ": This wall is between more than two rooms!");
+        }
     }
 
     public bool CanPlayerGetThrough()
@@ -48,45 +53,27 @@ public class Wall : Damageable
 
     public bool IsOuterHull()
     {
+        if (rooms.Count == 0) Debug.LogError(name + ": This wall has no adjacent rooms!");
         return rooms.Count < 2;
     }
 
-    override public float Repair(float value)
-    {
-        float oldHP = HP;
-        HP = Mathf.Min(HP + value, maxHP);
-        if (broken && HP > 0)
-        {
-            broken = false;
-            foreach (Room room in rooms)
-            {
-                room.TraverseGravity(true);
-            }
-            UpdateCollider();
-            
-        }    
-        UpdateColor();
-        return HP - oldHP; // Return amount repaired
-    }
 
-    override public float Damage(float value)
+
+    protected override void UpdateState()
+
     {
-        float oldHP = HP;
-        HP = Mathf.Max(HP - value, 0);
-        
-        if (!broken && HP <= 0)
+        bool newState = HP <= 0;
+        if (newState != broken)
         {
             broken = true;
             foreach (Room room in rooms)
             {
-                room.TraverseGravity(!IsOuterHull());  // TODO: Its unnecessary to set gravity for both rooms
-                
-
+                bool gravityOn = !IsOuterHull() && !broken;
+                room.TraverseGravity(gravityOn);  // NOTE: Its unnecessary to set gravity for both rooms
             }
             UpdateCollider();
         }
         UpdateColor();
-        return oldHP - HP; // Return amount damaged
     }
 
     void UpdateColor()
@@ -102,19 +89,5 @@ public class Wall : Damageable
     void UpdateCollider()
     {
         GetComponent<Collider2D>().enabled = !broken;
-    }
-
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
