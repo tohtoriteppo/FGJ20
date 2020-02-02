@@ -88,6 +88,7 @@ public class Wall : Damageable
 
     void UpdateCollider()
     {
-        GetComponent<Collider2D>().enabled = !broken;
+        //GetComponent<Collider2D>().enabled = !broken;
+        GetComponent<Collider2D>().isTrigger = broken;
     }
 }
