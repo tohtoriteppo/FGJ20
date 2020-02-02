@@ -85,7 +85,7 @@ public class Wall : Damageable
             broken = newState;
             foreach (Room room in rooms)
             {
-                bool gravityOn = !IsOuterHull() && !broken;
+                bool gravityOn = !(IsOuterHull() && broken);
                 room.TraverseGravity(gravityOn);  // NOTE: Its unnecessary to set gravity for both rooms
             }
             UpdateCollider();
