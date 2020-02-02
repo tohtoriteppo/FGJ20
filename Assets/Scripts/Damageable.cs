@@ -60,5 +60,10 @@ public abstract class Damageable : MonoBehaviour
     {
         
     }
+
+    public virtual bool CanBeRepaired()
+    {
+        return true;
+    }
 }
 

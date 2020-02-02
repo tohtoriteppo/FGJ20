@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Movement : MonoBehaviour
+public class Movement : Damageable
 {
 
     [SerializeField] int playerNum = 1;
@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour
     private int platformLayer = 11;
     private bool onPlatform;
 
+    private float maxOxygen = 1;
     private float oxygenLevel = 1;
     private float oxygenDecrease;
 
@@ -79,6 +80,35 @@ public class Movement : MonoBehaviour
         SetGravity(true);
     }
 
+    public override float Repair(float value)
+    {
+        oxygenLevel = Mathf.Min(oxygenLevel + value, maxOxygen);
+        if (dead && oxygenLevel >= 1)
+        {
+            dead = false;
+        }
+
+        return 1; //FIXME if you need actual return value
+    }
+
+    public override float Damage(float value)
+    {
+        oxygenLevel = Mathf.Max(oxygenLevel - value, 0);
+        DecreaseOxygen(); // FIXME: oxygen is reduced twice
+        return 1; //FIXME if you need actual return value
+    }
+
+
+    protected override void UpdateState()
+    {
+    }
+
+    public override bool CanBeRepaired()
+    {
+        // Only dead people can be given more oxygen to prevent abuse
+        return dead;
+    }
+
     // Update is called once per frame
    
     
@@ -122,7 +152,7 @@ public class Movement : MonoBehaviour
     }
     public void Resurrect()
     {
-        oxygenLevel = 1;
+        oxygenLevel = maxOxygen;
     }
     private void Jump()
     {
