@@ -46,7 +46,11 @@ public class MeteroScript : MonoBehaviour
             currentHealth -= other.GetComponent<Damageable>().Damage(currentHealth);
             if (currentHealth <= 0)
             {
-                ded();
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<CircleCollider2D>().enabled = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                GetComponent<ParticleSystem>().Stop();
+                Invoke("ded", 2);
             }
         }
     }
