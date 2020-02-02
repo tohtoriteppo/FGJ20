@@ -168,7 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fef6747d7101fd47a2dd1a0ac18dab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  HP: 0
+  healthBar: {fileID: 0}
+  damageSounds: []
+  repairSounds:
+  - {fileID: 8300000, guid: 141e2cde8b1731e5c8ccd75b068f3d30, type: 3}
   playerNum: 1
+  playerLayer: 9
   oxygenBar: {fileID: 321821629695649029, guid: c144b2b19b1495c4dbc6d4c0cb083250,
     type: 3}
 --- !u!61 &1760349696387022392
