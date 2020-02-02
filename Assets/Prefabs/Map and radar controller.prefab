@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3935978989865887702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: -0.55}
+  m_LocalPosition: {x: -2, y: 0, z: -0.55}
   m_LocalScale: {x: 1, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3935978990675130004}
@@ -141,8 +141,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3935978990600411646}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalPosition: {x: -3.725, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3935978989473296395}
   m_RootOrder: 1
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 065d87e8d16c55b46ac425a61f5712db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 896b5687fc7e9ac49a20fbe208e2eed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -270,7 +270,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6880d4cb4a1fe5041b0ea5ffbd376a9f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01cc97c95d452ab4eb43001241699d48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -293,14 +293,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207329191ce951c4db0998e7e040ab86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapTexture: {fileID: 2800000, guid: 6880d4cb4a1fe5041b0ea5ffbd376a9f, type: 3}
+  mapTexture: {fileID: 2800000, guid: 01cc97c95d452ab4eb43001241699d48, type: 3}
   shipLocation: {x: 0, y: 0}
   speed: 1
   angleDegrees: 0
   derp: 1
   speedVector: {x: 0, y: 0}
-  cameraStartX: -2.5
+  cameraStartX: -2
+  empDamageMultiplier: 1
   radius: 5
+  numberOfMachines: 2
+  turnDirection: 0
+  hattuvakio: 4
 --- !u!114 &3935978990675130011
 MonoBehaviour:
   m_ObjectHideFlags: 0
