@@ -76,7 +76,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 1 button 1
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: q
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -140,7 +140,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 1 button 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: q
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -156,7 +156,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 2 button 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: u
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -172,7 +172,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 3 button 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: right shift
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -188,7 +188,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 4 button 2
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: '[7]'
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -204,7 +204,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 1 button 0
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: e
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -220,7 +220,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 2 button 0
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: o
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -236,7 +236,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 3 button 0
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: right ctrl
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -252,7 +252,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick 4 button 0
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: '[9]'
     gravity: 0
     dead: 0
     sensitivity: 0
@@ -272,7 +272,7 @@ InputManager:
     gravity: 0
     dead: 0
     sensitivity: 1
-    snap: 0
+    snap: 1
     invert: 0
     type: 2
     axis: 8
@@ -331,8 +331,8 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    altNegativeButton: s
+    altPositiveButton: w
     gravity: 0
     dead: 0
     sensitivity: 1
@@ -1091,5 +1091,133 @@ InputManager:
     snap: 0
     invert: 1
     type: 2
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: p1_horizontal
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: a
+    altPositiveButton: d
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: p2_horizontal
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: j
+    positiveButton: l
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: p3_horizontal
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: left
+    positiveButton: right
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: p4_horizontal
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: '[4]'
+    altPositiveButton: '[6]'
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: p1_vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: s
+    altPositiveButton: w
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: p2_vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: k
+    altPositiveButton: i
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: p3_vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: down
+    positiveButton: up
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 3
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: p4_vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: '[5]'
+    positiveButton: '[8]'
+    altNegativeButton: '[2]'
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
     axis: 3
     joyNum: 4

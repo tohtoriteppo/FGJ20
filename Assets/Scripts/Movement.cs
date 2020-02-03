@@ -274,6 +274,10 @@ public class Movement : Damageable
     {
         horizontal = Input.GetAxis("p" + playerNum + "_joystick_horizontal");
         vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical");
+        float keyboard_horizontal = Input.GetAxis("p" + playerNum + "_horizontal");
+        float keyboard_vertical = Input.GetAxis("p" + playerNum + "_vertical");
+        horizontal = (Mathf.Abs(keyboard_horizontal) > 0) ? keyboard_horizontal : horizontal;
+        vertical = (Mathf.Abs(keyboard_vertical) > 0) ? keyboard_vertical : vertical;
     }
 
     private void TestGravity()
