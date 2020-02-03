@@ -94,7 +94,7 @@ public class ItemManagement : MonoBehaviour
 
     private void Navigate()
     {
-        float vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical");
+        float vertical = Input.GetAxis("p" + playerNum + "_joystick_vertical") + Input.GetAxis("p" + playerNum + "_vertical");
         if(vertical != 0)
         {
             foreach (GameObject obj in objectsClose)
